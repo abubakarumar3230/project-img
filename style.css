@@ -1,59 +1,49 @@
-/* --- Global Variables & Typography --- */
-:root {
-    --bg-primary: #0b0c10;
-    --bg-secondary: #1f2833;
-    --accent-color: #66fcf1;
-    --accent-dim: #45a29e;
-    --text-main: #c5a059; /* Sophisticated text alternative */
-    --text-bright: #ffffff;
-    --text-muted: #868e96;
-    --font-stack: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
-}
-
+/* --- Base Architecture & Global Reset --- */
 * {
+    box-sizing: border-box;
     margin: 0;
     padding: 0;
-    box-sizing: border-box;
 }
 
 html {
     scroll-behavior: smooth;
-    font-family: var(--font-stack);
-    background-color: var(--bg-primary);
-    color: var(--text-bright);
 }
 
 body {
+    background-color: #0b0f19; /* High-grade dark background */
+    color: #f1f5f9;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    line-height: 1.7;
     overflow-x: hidden;
 }
 
-/* --- Navigation Bar --- */
+/* --- Fixed Component: Navigation Bar --- */
 .navbar {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
-    z-index: 1000;
-    background: rgba(11, 12, 16, 0.85);
+    background-color: rgba(11, 15, 25, 0.85);
     backdrop-filter: blur(12px);
     border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    z-index: 2000;
 }
 
 .nav-container {
-    max-width: 1400px;
+    max-width: 1200px;
     margin: 0 auto;
+    padding: 1.2rem 2rem;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 1.25rem 2rem;
 }
 
 .logo {
     font-size: 1.5rem;
     font-weight: 700;
-    color: var(--accent-color);
+    color: #38bdf8;
     text-decoration: none;
-    letter-spacing: -1px;
+    letter-spacing: -0.02em;
 }
 
 .nav-links {
@@ -63,47 +53,40 @@ body {
 }
 
 .nav-links a {
+    color: #94a3b8;
     text-decoration: none;
-    color: var(--text-muted);
-    font-size: 0.85rem;
+    font-size: 0.9rem;
     font-weight: 500;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    transition: color 0.3s ease;
+    transition: color 0.2s ease;
 }
 
-.nav-links a:hover,
-.nav-links a.active {
-    color: var(--accent-color);
+.nav-links a:hover, .nav-links a.active {
+    color: #38bdf8;
 }
 
-/* --- Layout Scaffolding --- */
+/* --- Structural System Layouts --- */
 .panel {
-    min-height: 100vh;
-    width: 100vw;
-    display: flex;
-    align-items: center;
-    position: relative;
-    padding: 6rem 2rem 4rem 2rem;
+    padding: 8rem 0;
+    width: 100%;
 }
 
 .content-section {
-    background-color: var(--bg-primary);
+    background-color: #0b0f19;
 }
 
-.content-section.alt-bg {
-    background-color: #12141c;
+.alt-bg {
+    background-color: #0f172a; /* Secondary dark layer */
 }
 
 .container {
     max-width: 1100px;
     margin: 0 auto;
-    width: 100%;
+    padding: 0 2rem;
 }
 
 .grid-2 {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     gap: 4rem;
     align-items: center;
 }
@@ -112,107 +95,105 @@ body {
     max-width: 800px;
 }
 
-/* --- Reusable Components --- */
+.text-center {
+    text-align: center;
+}
+
 .section-badge {
     display: inline-block;
-    color: var(--accent-dim);
+    font-family: monospace;
     font-size: 0.8rem;
-    font-weight: 600;
-    letter-spacing: 2px;
+    color: #38bdf8;
+    letter-spacing: 0.15em;
     text-transform: uppercase;
     margin-bottom: 1rem;
 }
 
+h1, h2, h3, h4 {
+    color: #ffffff;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+}
+
 h2 {
     font-size: 2.5rem;
-    font-weight: 700;
-    letter-spacing: -0.5px;
     margin-bottom: 1.5rem;
-    color: var(--text-bright);
 }
 
-p {
-    font-size: 1.05rem;
-    line-height: 1.7;
-    color: #d1d5db;
-    margin-bottom: 1.25rem;
+.section-intro {
+    font-size: 1.15rem;
+    color: #94a3b8;
+    margin-bottom: 3rem;
+    max-width: 700px;
 }
 
-.btn {
-    display: inline-block;
-    padding: 0.85rem 2rem;
-    background: transparent;
-    border: 1px solid var(--accent-color);
-    color: var(--accent-color);
-    text-decoration: none;
-    font-weight: 600;
-    border-radius: 4px;
-    transition: all 0.3s ease;
-}
-
-.btn:hover {
-    background: var(--accent-color);
-    color: var(--bg-primary);
-    box-shadow: 0 8px 20px rgba(102, 252, 241, 0.2);
-}
-
-/* --- Page 1: Home/Hero (Using me.jpg) --- */
+/* --- Component Block: Hero Space --- */
 .hero-section {
-    background: url('me.jpg') no-repeat center center/cover;
-    text-align: center;
+    height: 100vh;
+    display: flex;
+    align-items: center;
     justify-content: center;
-}
-
-.hero-overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(135deg, rgba(11, 12, 16, 0.95) 30%, rgba(31, 40, 51, 0.7) 100%);
-    z-index: 1;
+    position: relative;
+    padding: 0;
+    background: radial-gradient(circle at 80% 20%, rgba(56, 189, 248, 0.08), transparent 40%);
 }
 
 .hero-content {
-    position: relative;
-    z-index: 2;
-    max-width: 800px;
+    text-align: center;
+    z-index: 10;
+    padding: 0 2rem;
 }
 
 .hero-content h1 {
     font-size: 4.5rem;
     font-weight: 700;
-    letter-spacing: -2px;
-    margin-bottom: 1.5rem;
-    color: var(--text-bright);
+    line-height: 1.1;
+    margin: 1rem 0 1.5rem 0;
+    background: linear-gradient(to right, #ffffff, #94a3b8);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
 }
 
-.hero-content .subtitle {
-    font-size: 1rem;
+.subtitle {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #38bdf8;
+    letter-spacing: 0.05em;
     text-transform: uppercase;
-    letter-spacing: 3px;
-    color: var(--accent-color);
-    margin-bottom: 0.5rem;
 }
 
-.hero-content .tagline {
+.tagline {
     font-size: 1.35rem;
-    color: #cbd5e1;
-    margin-bottom: 2.5rem;
+    color: #94a3b8;
+    max-width: 600px;
+    margin: 0 auto 2.5rem auto;
 }
 
-/* --- Page 2: About (Using about.jpg) --- */
-.about-img {
+.btn {
+    display: inline-block;
+    padding: 0.8rem 2rem;
+    background-color: #38bdf8;
+    color: #0b0f19;
+    text-decoration: none;
+    font-weight: 600;
+    border-radius: 4px;
+    transition: transform 0.2s ease, background-color 0.2s ease;
+}
+
+.btn:hover {
+    transform: translateY(-2px);
+    background-color: #7dd3fc;
+}
+
+/* --- Internal Blocks: Cards & Substructures --- */
+.image-wrapper img {
     width: 100%;
-    max-height: 500px;
-    object-fit: cover;
     border-radius: 8px;
-    box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+    border: 1px solid rgba(255, 255, 255, 0.05);
 }
 
-/* --- Page 3: Education --- */
 .timeline-item {
-    border-left: 2px solid var(--accent-dim);
+    border-left: 2px solid rgba(56, 189, 248, 0.2);
     padding-left: 2rem;
     margin-top: 2rem;
 }
@@ -220,21 +201,14 @@ p {
 .timeline-header {
     display: flex;
     justify-content: space-between;
-    align-items: baseline;
+    align-items: center;
     margin-bottom: 0.5rem;
 }
 
 .institution {
-    color: var(--accent-color);
+    color: #38bdf8;
     font-weight: 500;
     margin-bottom: 1rem;
-}
-
-/* --- Page 4: Skills (No Icons) --- */
-.section-intro {
-    max-width: 700px;
-    color: var(--text-muted);
-    margin-bottom: 3rem;
 }
 
 .skills-grid {
@@ -244,93 +218,56 @@ p {
 }
 
 .skill-card {
-    background: #161922;
+    background-color: #0f172a;
     padding: 2rem;
     border-radius: 6px;
     border: 1px solid rgba(255, 255, 255, 0.03);
 }
 
 .skill-header {
-    display: flex;
-    flex-direction: column;
     margin-bottom: 1rem;
 }
 
 .skill-header h3 {
     font-size: 1.15rem;
     margin-bottom: 0.25rem;
-    color: var(--text-bright);
 }
 
-.skill-header .percentage {
-    font-size: 0.75rem;
-    text-transform: uppercase;
-    color: var(--accent-color);
-    font-weight: 600;
-    letter-spacing: 1px;
+.percentage {
+    font-size: 0.8rem;
+    color: #38bdf8;
+    font-family: monospace;
 }
 
-/* --- Page 5: Certifications (Using cert.jpg) --- */
-.cert-img {
-    width: 100%;
-    border-radius: 4px;
-    box-shadow: 0 15px 30px rgba(0,0,0,0.5);
-    border: 1px solid rgba(255, 255, 255, 0.1);
+.skill-card p {
+    color: #94a3b8;
+    font-size: 0.95rem;
 }
 
 .text-link {
-    color: var(--accent-color);
+    color: #38bdf8;
     text-decoration: none;
     font-weight: 500;
-    font-size: 0.95rem;
-    transition: opacity 0.2s;
+    display: inline-block;
+    margin-top: 1rem;
 }
 
-.text-link:hover {
-    text-decoration: underline;
-}
-
-/* --- Page 6: Projects --- */
-.project-showcase {
-    background: linear-gradient(to right, #161922, #1f2430);
-    padding: 3rem;
-    border-radius: 8px;
-    border-left: 4px solid var(--accent-color);
-}
-
-.project-tags {
-    display: flex;
-    gap: 0.75rem;
-    margin-top: 1.5rem;
-}
-
-.project-tags span {
-    font-size: 0.75rem;
-    background: rgba(102, 252, 241, 0.08);
-    color: var(--accent-color);
-    padding: 0.35rem 0.85rem;
-    border-radius: 3px;
-    font-weight: 500;
-}
-
-/* --- Page 7: Stack --- */
+/* --- Stack & Deployment Environments --- */
 .stack-layout {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
     gap: 2rem;
-    margin-top: 2rem;
 }
 
 .stack-box {
-    background: var(--bg-primary);
+    background-color: #0b0f19;
     padding: 2.5rem;
     border-radius: 6px;
-    border: 1px solid rgba(255,255,255,0.05);
+    border: 1px solid rgba(255, 255, 255, 0.05);
 }
 
 .stack-box h3 {
     margin-bottom: 1.5rem;
-    color: var(--accent-color);
     font-size: 1.25rem;
 }
 
@@ -339,119 +276,170 @@ p {
 }
 
 .stack-box li {
-    margin-bottom: 0.75rem;
-    color: #9cd4d1;
-    position: relative;
-    padding-left: 1.25rem;
+    color: #94a3b8;
+    margin-bottom: 0.8rem;
+    display: flex;
+    align-items: center;
 }
 
 .stack-box li::before {
-    content: "—";
-    position: absolute;
-    left: 0;
-    color: var(--accent-dim);
+    content: "→";
+    color: #38bdf8;
+    margin-right: 0.75rem;
 }
 
-/* --- Page 8: Platforms --- */
 .platforms-grid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
     gap: 2rem;
-    margin-top: 2rem;
-}
-
-.platform-item {
-    border-top: 2px solid var(--accent-dim);
-    padding-top: 1.5rem;
 }
 
 .platform-item h4 {
-    font-size: 1.25rem;
+    font-size: 1.2rem;
     margin-bottom: 0.5rem;
+    color: #38bdf8;
 }
 
-/* --- Page 9: Philosophy --- */
-.text-center {
-    text-align: center;
+.platform-item p {
+    color: #94a3b8;
 }
 
 .philosophy-quote {
     font-size: 1.8rem;
     font-style: italic;
-    line-height: 1.6;
-    color: #cbd5e1;
-    max-width: 700px;
-    margin: 2rem auto 0 auto;
+    color: #e2e8f0;
+    line-height: 1.5;
+    font-weight: 300;
 }
 
-/* --- Page 10: Contact & Footer --- */
-.contact-container {
+/* ========================================================
+   NEW CORE COMPONENT: PAGE 08 MEDIA GRID SHOWCASE STYLES
+   ======================================================== */
+.media-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2.5rem;
+    margin-top: 2rem;
+}
+
+@media (min-width: 768px) {
+    .media-grid {
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    }
+}
+
+.media-card {
+    background-color: #0b0f19;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 8px;
+    padding: 2rem;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
-    height: 100%;
+    gap: 1.25rem;
+    transition: border-color 0.2s ease;
 }
 
+.media-card:hover {
+    border-color: rgba(56, 189, 248, 0.2);
+}
+
+.media-tag {
+    font-family: monospace;
+    font-size: 0.75rem;
+    letter-spacing: 0.12em;
+    color: #94a3b8;
+}
+
+.media-element-audio {
+    width: 100%;
+}
+
+.media-element-video {
+    max-width: 100%;
+    height: auto;
+    border-radius: 4px;
+    background: #000;
+}
+
+.iframe-container {
+    position: relative;
+    width: 100%;
+    padding-bottom: 56.25%; /* Fixed 16:9 responsive aspect lock */
+    height: 0;
+}
+
+.iframe-container iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 4px;
+    border: 0;
+}
+
+/* --- Base Contact Module & Footer Components --- */
 .contact-methods {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 1.5rem;
-    margin-top: 3rem;
-    margin-bottom: 6rem;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 2rem;
+    margin-top: 4rem;
 }
 
 .contact-card {
-    background: #161922;
+    background-color: #0f172a;
     padding: 2rem;
     border-radius: 6px;
     text-decoration: none;
     display: flex;
     flex-direction: column;
-    transition: transform 0.3s ease, border-color 0.3s ease;
-    border: 1px solid transparent;
+    border: 1px solid rgba(255, 255, 255, 0.03);
+    transition: transform 0.2s ease, border-color 0.2s ease;
 }
 
 .contact-card:hover {
     transform: translateY(-4px);
-    border-color: var(--accent-color);
+    border-color: rgba(56, 189, 248, 0.3);
 }
 
 .contact-card .label {
-    font-size: 0.75rem;
+    font-size: 0.8rem;
+    color: #38bdf8;
     text-transform: uppercase;
-    color: var(--text-muted);
+    letter-spacing: 0.05em;
     margin-bottom: 0.5rem;
-    letter-spacing: 1px;
 }
 
 .contact-card .value {
     font-size: 1.1rem;
-    color: var(--text-bright);
-    font-weight: 500;
+    color: #ffffff;
+    word-break: break-all;
 }
 
 .footer {
-    border-top: 1px solid rgba(255, 255, 255, 0.05);
+    margin-top: 8rem;
     padding-top: 2rem;
-    display: flex;
-    justify-content: center;
-    font-size: 0.85rem;
-    color: var(--text-muted);
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+    text-align: center;
+    color: #64748b;
+    font-size: 0.9rem;
 }
 
-/* --- Responsive Adjustments --- */
-@media (max-width: 900px) {
-    .grid-2, .stack-layout {
-        grid-template-columns: 1fr;
-        gap: 2.5rem;
-    }
-    .platforms-grid {
-        grid-template-columns: 1fr;
-    }
-    .hero-content h1 {
-        font-size: 3rem;
-    }
+/* --- Mobile Responsiveness Breakpoints Override (Always Last) --- */
+@media (max-width: 768px) {
     .nav-links {
-        display: none; /* Keeps layout clean on mobile phones */
+        display: none; /* Hide for true minimal systems layout or replace with menu drawer triggers */
+    }
+    
+    .hero-content h1 {
+        font-size: 2.8rem;
+    }
+    
+    .panel {
+        padding: 5rem 0;
+    }
+    
+    h2 {
+        font-size: 1.8rem;
     }
 }
